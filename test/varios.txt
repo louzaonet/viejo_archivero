@@ -1,0 +1,30 @@
+entra
+salidas
+ayuda
+i
+e
+e
+e
+n
+coge todo
+i
+deja todo
+coge vela
+s
+s
+di al viejo "hola"
+di al viejo "como te llamas"
+di viejo "adios"
+solo texto
+m
+m
+rsave
+n
+rload
+level 10
+coge cosa
+deja llave
+joder
+joder
+joder
+joder

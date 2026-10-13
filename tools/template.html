@@ -1,0 +1,60 @@
+<title>{{title}}</title>
+<style>
+/* Layout: una sola pantalla de Spectrum centrada, con su borde de color y un pie mínimo.
+   Mundo único y oscuro a propósito (como un televisor de los ochenta): sin tema claro. */
+:root {
+  --bg: #15131a;          /* fondo de salón con la luz apagada */
+  --fg: #cfcad6;          /* texto del pie */
+  --muted: #8b8496;       /* ayudas */
+  --key: #2a2631;         /* teclas de ejemplo */
+  --keyfg: #e8e4ee;
+  --focus: #d7d700;       /* amarillo Spectrum */
+  --ui: "Spline Sans Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--ui); }
+.wrap { box-sizing: border-box; min-height: 100%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 14px; padding-block: 16px; padding-inline: 16px; }
+.tv { position: relative; width: min(100%, 832px); }
+#border { background: #000; padding: 6.25% 7.8%; transition: background-color .15s linear; border-radius: 3px; }
+#screen { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; image-rendering: pixelated; image-rendering: crisp-edges; }
+/* el campo real de escritura va invisible encima de la pantalla: así aparece el teclado en el móvil */
+#cmd { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; padding: 0; margin: 0;
+  font-size: 16px; color: transparent; background: transparent; caret-color: transparent; cursor: text; }
+.tv:focus-within #border { outline: 2px solid var(--focus); outline-offset: 3px; }
+.foot { width: min(100%, 832px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
+  font-size: 12px; line-height: 1.6; color: var(--muted); }
+.foot p { margin: 0; min-width: 0; }
+kbd { font-family: var(--ui); font-size: 11px; background: var(--key); color: var(--keyfg); padding: 1px 5px; border-radius: 3px; letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) { #border { transition: none; } }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap">
+<div class="wrap">
+  <div class="tv">
+    <div id="border"><canvas id="screen" width="256" height="192" aria-label="{{screen}}"></canvas></div>
+    <input id="cmd" type="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-label="{{input}}">
+  </div>
+  <div class="foot">
+    <p>{{help}}</p>
+    <p>{{credits}}</p>
+  </div>
+</div>
+<script>/*__ENGINE__*/</script>
+<script>/*__SCREEN__*/</script>
+<script>
+// Base de datos y fuente del juego original (sacadas del Spectrum)
+const DB = /*__DB__*/null;
+const FONT = DB.font;
+(function () {
+  const screen = new SpectrumScreen(document.getElementById('screen'), document.getElementById('border'),
+    FONT, DB, document.getElementById('cmd'));
+  window.__screen = screen; window.__db = DB;
+  const io = {
+    print: s => screen.print(s), cls: () => screen.cls(), clearText: () => screen.clearText(), picture: (n, full) => screen.picture(n, full),
+    input: () => screen.input(), anykey: p => screen.anykey(p), key: () => screen.waitKey(), pause: ms => screen.pause(ms),
+    border: n => screen.border(n), store: (k, v) => screen.store(k, v),
+  };
+  new PAW.Engine(DB, io).run();
+})();
+</script>

@@ -1,0 +1,59 @@
+# El Viejo Archivero: solución completa
+entra
+e
+e
+e
+n
+coge vela
+s
+e
+s
+coge llave
+n
+se
+ex babosidades
+coge espada
+no
+e
+abre puerta con llave
+baja
+corta ala con espada
+coge ala
+baja
+no
+se
+n
+s
+saca programadores
+s
+saca grafistas
+n
+n
+o
+s
+e
+o
+sube
+sube
+n
+coge aventura
+coge pluma
+s
+o
+o
+s
+dar aventura al viejo
+coge tarjeta
+n
+e
+e
+entra
+coge papiro
+sal
+o
+o
+o
+o
+o
+meter tarjeta en maquina
+sal
